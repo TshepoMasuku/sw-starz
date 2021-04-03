@@ -51,7 +51,7 @@ class App extends Component {
             style={{ width:'20%',padding:'10px',border: '1px solid yellow' }}
             onChange={ this.onInputChange }
           />
-          <button type="submit"
+          <button 
             style={{ padding:'10px',border: '1px solid yellow' }}
             onClick={ this.onClearInput }
           >
