@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/sw-starz/static/css/main.0e4aceb9.chunk.css",
+    "main.js": "/sw-starz/static/js/main.c1d61fef.chunk.js",
+    "main.js.map": "/sw-starz/static/js/main.c1d61fef.chunk.js.map",
+    "runtime-main.js": "/sw-starz/static/js/runtime-main.0189040d.js",
+    "runtime-main.js.map": "/sw-starz/static/js/runtime-main.0189040d.js.map",
+    "static/css/2.31461e4f.chunk.css": "/sw-starz/static/css/2.31461e4f.chunk.css",
+    "static/js/2.c87d3335.chunk.js": "/sw-starz/static/js/2.c87d3335.chunk.js",
+    "static/js/2.c87d3335.chunk.js.map": "/sw-starz/static/js/2.c87d3335.chunk.js.map",
+    "static/js/3.00ab2fff.chunk.js": "/sw-starz/static/js/3.00ab2fff.chunk.js",
+    "static/js/3.00ab2fff.chunk.js.map": "/sw-starz/static/js/3.00ab2fff.chunk.js.map",
+    "index.html": "/sw-starz/index.html",
+    "static/css/2.31461e4f.chunk.css.map": "/sw-starz/static/css/2.31461e4f.chunk.css.map",
+    "static/css/main.0e4aceb9.chunk.css.map": "/sw-starz/static/css/main.0e4aceb9.chunk.css.map",
+    "static/js/2.c87d3335.chunk.js.LICENSE.txt": "/sw-starz/static/js/2.c87d3335.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0189040d.js",
+    "static/css/2.31461e4f.chunk.css",
+    "static/js/2.c87d3335.chunk.js",
+    "static/css/main.0e4aceb9.chunk.css",
+    "static/js/main.c1d61fef.chunk.js"
+  ]
+}
