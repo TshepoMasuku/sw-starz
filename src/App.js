@@ -1,6 +1,6 @@
 import './App.css';
 import "tachyons";
-import { FaSearch } from "react-icons/fa";
+import { FcUndo } from "react-icons/fc";
 import { Text } from "react-font";
 import React, { Component } from 'react';
 import CardList from "./CardList";
@@ -15,6 +15,7 @@ class App extends Component {
       data: [],
     }
     this.onInputChange = this.onInputChange.bind(this);
+    this.onClearInput = this.onClearInput.bind(this);
   }
 
   componentDidMount(){
@@ -23,12 +24,17 @@ class App extends Component {
       .then( datta => this.setState({ data: datta.results }) )
   }
 
-  onInputChange = (input) => { this.setState({inputText: input.target.value}) }
+  onInputChange = (event) => { 
+    this.setState({inputText: event.target.value});
+  }
+  onClearInput = () => { 
+    this.setState({inputText: ""});
+  }
 
   render() {
     const { inputText,data } = this.state;
     const filteredStarz = data.filter( (star) => {
-      return(star.name.toLowerCase().includes(inputText))
+      return( star.name.toLowerCase().includes( inputText.toLowerCase() ) )
     });
     return (
       <div className="App">
@@ -40,13 +46,16 @@ class App extends Component {
         <br />
         <div style={{ display:'flex',justifyContent:'center' }}>
           <input 
+            type="search"
             placeholder="Type A StarWars Star."
             style={{ width:'20%',padding:'10px',border: '1px solid yellow' }}
             onChange={ this.onInputChange }
           />
-          <button 
+          <button type="submit"
             style={{ padding:'10px',border: '1px solid yellow' }}
-          >   <FaSearch/>
+            onClick={ this.onClearInput }
+          >
+            <FcUndo/>
           </button>
         </div>
         <br />
