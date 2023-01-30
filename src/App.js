@@ -1,11 +1,11 @@
-import './App.css';
-import "tachyons";
+import React, { Component } from 'react';
+import ErrorBoundry from "./ErrorBoundry";
+import CardList from "./CardList";
+import Scroll from "./Scroll";
 import { FcUndo } from "react-icons/fc";
 import { Text } from "react-font";
-import React, { Component } from 'react';
-import CardList from "./CardList";
-import ErrorBoundry from "./ErrorBoundry";
-import Scroll from "./Scroll";
+import "tachyons";
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -48,8 +48,9 @@ class App extends Component {
           <input 
             type="search"
             placeholder="Type A StarWars Star."
-            style={{ width:'20%',padding:'10px',border: '1px solid yellow' }}
+            style={{ width:'25%',padding:'10px',border: '1px solid yellow' }}
             onChange={ this.onInputChange }
+            value={this.state.inputText}
           />
           <button 
             style={{ padding:'10px',border: '1px solid yellow' }}

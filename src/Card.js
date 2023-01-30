@@ -3,7 +3,7 @@ import Font, { Text } from 'react-font';
 
 const cardStyle = {
     background: 'linear-gradient(180deg, rgba(34, 33, 33, 0.800), rgba(255, 255, 255, 0.700))',
-    minWidth: '300px',
+    width: '280px',
 }
 
 export default function Card({name,height,mass,hair,skin,eye,birthyear,gender}) {
