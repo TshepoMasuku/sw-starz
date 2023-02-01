@@ -29,8 +29,8 @@ export default function Card({name,height,mass,hair,skin,eye,birthyear,gender}) 
                     <p className="f4 fw4">
                         Birth Year: {birthyear} <br />
                         Gender: {gender} <br />
-                        Height: {height} <br />
-                        Mass: {mass} <br />
+                        Height: {height}cm <br />
+                        Mass: {mass}kg <br />
                         Hair Color: {hair} <br />
                         Skin Color: {skin} <br />
                         Eye Color: {eye} <br />
