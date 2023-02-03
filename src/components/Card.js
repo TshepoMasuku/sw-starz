@@ -2,8 +2,9 @@ import React from 'react';
 import Font, { Text } from 'react-font';
 
 const cardStyle = {
-    background: 'linear-gradient(180deg, rgba(34, 33, 33, 0.800), rgba(255, 255, 255, 0.700))',
     width: '280px',
+    boxSizing: 'unset',
+    background: 'linear-gradient(180deg, rgba(34, 33, 33, 0.800), rgba(255, 255, 255, 0.700))',
 }
 
 export default function Card({name,height,mass,hair,skin,eye,birthyear,gender}) {
@@ -29,8 +30,8 @@ export default function Card({name,height,mass,hair,skin,eye,birthyear,gender}) 
                     <p className="f4 fw4">
                         Birth Year: {birthyear} <br />
                         Gender: {gender} <br />
-                        Height: {height}cm <br />
-                        Mass: {mass}kg <br />
+                        Height: { (height!=="unknown") ? (height+"cm") : (height) } <br />
+                        Mass: { (mass!=="unknown") ? (mass+"kg") : (mass) } <br />
                         Hair Color: {hair} <br />
                         Skin Color: {skin} <br />
                         Eye Color: {eye} <br />

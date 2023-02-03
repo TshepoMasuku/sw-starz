@@ -58,7 +58,7 @@ class App extends Component {
   handlePageChange(pageNumber) {
     // pageNumber - begins from zero like indexes
     // console.log(`The active page is ${pageNumber}`);
-    this.setState({ data:[], activePage: pageNumber });
+    this.setState({ activePage: pageNumber, data:[] });
   }
 
   render() {
