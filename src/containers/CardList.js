@@ -15,14 +15,16 @@ export default function CardList({passData}) {
                     return(
                         <Card 
                             key={index}
+                            image={user.image}
                             name={user.name}
+                            homeworld={user.homeworld}
+                            species={user.species}
                             height={user.height}
-                            mass={user.mass}
-                            hair={user.hair_color}
-                            skin={user.skin_color}
-                            eye={user.eye_color}
-                            birthyear={user.birth_year}
                             gender={user.gender}
+                            mass={user.mass}
+                            hair={user.hairColor}
+                            eye={user.eyeColor}
+                            skin={user.skinColor}
                         />
                     );
                 })
@@ -30,3 +32,19 @@ export default function CardList({passData}) {
         </div>
     )
 }
+
+//     "image": "https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg",
+//     "name": "Luke Skywalker",
+//     "height": 1.72,
+//     "mass": 73,
+//     "gender": "male",
+//     "homeworld": "tatooine",
+//     "bornLocation": "polis massa",
+//     "species": "human",
+//     "hairColor": "blond",
+//     "eyeColor": "blue",
+//     "skinColor": "light",
+//     ------------------------------------------
+//     "hairColor": "brown, later graying",
+//     "eyeColor": "brown",
+//     "skinColor": "light",

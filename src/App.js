@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // eslint-disable-next-line
-import offlineAPIcall from "./api.json";
+// import offlineAPIcall from "./api-old.json";
 import ErrorBoundry from "./components/ErrorBoundry";
 import CardList from "./containers/CardList";
 import Scroll from "./containers/Scroll";
-import ReactPaginate from 'react-paginate';
-import styled from 'styled-components';
+import ReactPaginate from "react-paginate";
+import styled from "styled-components";
 import { FcUndo } from "react-icons/fc";
 import { Text } from "react-font";
-import stylePagination from './pagination.css';
+import stylePagination from "./pagination.css";
 import "tachyons";
-import './App.css';
+import "./App.css";
 
+const MyPagination = styled(ReactPaginate).attrs({ activeClassName: "active" })` // default to "selected"
+  ${stylePagination}
+`;
 
-const MyPagination = styled(ReactPaginate)
-  .attrs({activeClassName: 'active',}) // default to "selected"
-`${stylePagination}`;
-
-const dflexCenter = { 
-  display: 'flex',
-  justifyContent: 'center',
-}
+const dflexCenter = {
+  display: "flex",
+  justifyContent: "center",
+};
 
 class App extends Component {
   constructor(props) {
@@ -28,76 +27,100 @@ class App extends Component {
     this.state = {
       // data: offlineAPIcall,
       data: [],
+      pageData: [],
       inputText: "",
-      activePage: 0, 
-    }
-    this.onInputChange = this.onInputChange.bind(this);
+      activePage: 0,
+    };
+    this.allowedIDs = this.allowedIDs.bind(this);
     this.onClearInput = this.onClearInput.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.paginationData = this.paginationData.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
-  componentDidMount(){
-    fetch("https://swapi.dev/api/people/?page=1")
-      .then( response => response.json() )
-      .then( datta => this.setState({ data: datta.results }) )
-  }
-  componentWillUpdate(){
-    const {activePage} = this.state;
-    fetch(`https://swapi.dev/api/people/?page=${activePage+1}`)
-      .then( response => response.json() )
-      .then( datta => this.setState({ data: datta.results }) )
+  componentDidMount() {
+    fetch("https://raw.githubusercontent.com/akabab/starwars-api/0.2.1/api/all.json")
+      .then((response) => response.json())
+      .then((results) => this.setState({ data: results, 
+        pageData: results.filter(result => result.id < 10)
+      }));
   }
 
-  onInputChange = (event) => { 
-    this.setState({inputText: event.target.value});
-  }
-  onClearInput = () => { 
+  onInputChange = (event) => {
+    this.setState({ inputText: event.target.value });
+  };
+  onClearInput = () => {
     this.setState({ inputText: "" });
-  }
+  };
 
   handlePageChange(pageNumber) {
     // pageNumber - begins from zero like indexes
     // console.log(`The active page is ${pageNumber}`);
-    this.setState({ activePage: pageNumber, data:[] });
+    this.setState({ activePage: pageNumber });
+    this.paginationData();
   }
 
+  allowedIDs = () => {
+    const multiplier = 10;
+    const floorID = multiplier * this.state.activePage;
+    const ceilingID = floorID + 10;
+    let currentID = floorID;
+    let allowedIDsArr = [];
+
+    while (currentID !== ceilingID) {
+      if (currentID !== 0 && currentID !== 89) {
+        allowedIDsArr.push(currentID);
+      }
+      currentID++;
+    }
+    return allowedIDsArr;
+  };
+  paginationData = () => {
+    console.log("paginationData EXECUTED");
+    const pageData = this.state.data.filter((star) =>
+      this.allowedIDs().includes(star.id)
+    );
+    // this.setState({ pageData });
+    this.setState({ pageData }, () => console.log(this.state.pageData));
+  };
+
   render() {
-    const { inputText, data, activePage } = this.state;
-    const filteredStarz = data.filter( (star) => {
-      return( star.name.toLowerCase().includes( inputText.toLowerCase() ) )
+    const { inputText, pageData: data, activePage } = this.state;
+    const filteredStarz = data.filter((star) => {
+      return star.name.toLowerCase().includes(inputText.toLowerCase());
     });
+    console.log("allowedIDs 2be displayed ---> ", this.allowedIDs());
+    console.log('pageData :>> ', data);
     return (
       <div>
-        <Text family='Monoton' className="f1 tc title">
+        <Text family="Monoton" className="f1 tc title">
           STAR WARS - STARZ!
         </Text>
         <div style={dflexCenter}>
-          <input 
+          <input
             type="search"
             placeholder="Search A StarWars Star."
-            className='searchbar'
-            onChange={ this.onInputChange }
+            className="searchbar"
+            onChange={this.onInputChange}
             value={this.state.inputText}
           />
-          <button 
-            className='searchbarBtn'
-            onClick={ this.onClearInput }
-          >
-            <FcUndo/>
+          <button className="searchbarBtn" onClick={this.onClearInput}>
+            <FcUndo />
           </button>
         </div>
         <br />
-        <ErrorBoundry> 
+        <ErrorBoundry>
           <Scroll>
-            {
-              data.length === 0 ? 
-                <Text family='Monoton' className='f1 tc'> LOADING... </Text>
-                :
-                <CardList passData={filteredStarz}/>
-            }
-          </Scroll> 
+            {data.length === 0 ? (
+              <Text family="Monoton" className="f1 tc">
+                LOADING...
+              </Text>
+              ) : (
+              <CardList passData={filteredStarz} activePage={activePage} />
+            )}
+          </Scroll>
           <div style={dflexCenter} data-pagination>
-            <MyPagination 
+            <MyPagination
               previousLabel="Previous"
               nextLabel="Next"
               pageClassName="page-item"
@@ -114,12 +137,12 @@ class App extends Component {
               pageRangeDisplayed={4}
               pageCount={9}
               forcePage={activePage}
-              onPageChange={ event => this.handlePageChange(event.selected) }
+              onPageChange={(event) => this.handlePageChange(event.selected)}
             />
           </div>
         </ErrorBoundry>
       </div>
-    )
+    );
   }
 }
 

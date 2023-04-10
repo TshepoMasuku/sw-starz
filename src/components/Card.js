@@ -7,7 +7,10 @@ const cardStyle = {
     background: 'linear-gradient(180deg, rgba(34, 33, 33, 0.800), rgba(255, 255, 255, 0.700))',
 }
 
-export default function Card({name,height,mass,hair,skin,eye,birthyear,gender}) {
+export default function Card(props) {
+    console.log("hairColor: ", props.hairColor);
+    console.log("skinColor: ", props.skinColor);
+    console.log("eyeColor: ", props.eyeColor);
     return (
         <article style={cardStyle} className="mw5 center br3 pa3 pa4-ns mv3 ba b--black-10">
             <div className="tc">
@@ -17,24 +20,25 @@ export default function Card({name,height,mass,hair,skin,eye,birthyear,gender}) 
                     italic
                     weight={600}
                 >
-                    {name}
+                    {props.name}
                 </Text>
                 <img 
-                    src={`https://robohash.org/${name}.png`} 
+                    src={props.image}
                     alt="StarzPic"
-                    className="br-100 h4 w4 dib ba b--black-05 pa2"
-                    width="auto" height="50%"
+                    className="br4 h4 w4 dib ba b--black-05 pa2"
+                    width="auto" height="100%"
                 />
                 {/* Jedi Characteristics */}
                 <Font family="Redressed">
-                    <p className="f4 fw4">
-                        Birth Year: {birthyear} <br />
-                        Gender: {gender} <br />
-                        Height: { (height!=="unknown") ? (height+"cm") : (height) } <br />
-                        Mass: { (mass!=="unknown") ? (mass+"kg") : (mass) } <br />
-                        Hair Color: {hair} <br />
-                        Skin Color: {skin} <br />
-                        Eye Color: {eye} <br />
+                    <p className="f3 fw4">
+                        Homeworld: {props.homeworld} <br />
+                        Species: {props.species} <br />
+                        Gender: {props.gender} <br />
+                        Height: {props.height}m <br />
+                        Mass: {props.mass}kg <br />
+                        Skin Color: {props.skinColor} <br />
+                        Eye Color: {props.eyeColor} <br />
+                        Hair Color: {props.hairColor} <br />
                     </p>
                 </Font>
             </div>
