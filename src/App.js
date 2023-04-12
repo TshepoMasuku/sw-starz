@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// eslint-disable-next-line
-// import offlineAPIcall from "./api-new.json";
 import ErrorBoundry from "./components/ErrorBoundry";
 import CardList from "./containers/CardList";
 import Scroll from "./containers/Scroll";
@@ -11,10 +9,13 @@ import { Text } from "react-font";
 import stylePagination from "./pagination.css";
 import "tachyons";
 import "./App.css";
+// import offlineAPIcall from "./api-new.json";
+// // Line 12 & Line 14 --> Used Offline only
+// const shownPageData = offlineAPIcall.filter((result) => result.id < 10);
 
-const MyPagination = styled(ReactPaginate).attrs({ activeClassName: "active" })` // default to "selected"
-  ${stylePagination}
-`;
+
+const MyPagination = styled(ReactPaginate).attrs({ activeClassName: "active" })
+  `${stylePagination}`; // defaults to "selected"
 
 const dflexCenter = {
   display: "flex",
@@ -25,13 +26,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // data: offlineAPIcall, 
-      data: [],
-      pageData: [],
       inputText: "",
       activePage: 0,
+      data: [],
+      pageData: [],
+      // data: offlineAPIcall,
+      // pageData: shownPageData,
     };
-    this.displayPage = this.displayPage.bind(this);
     this.onClearInput = this.onClearInput.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -40,26 +41,25 @@ class App extends Component {
   componentDidMount() {
     fetch("https://raw.githubusercontent.com/akabab/starwars-api/0.2.1/api/all.json")
       .then((response) => response.json())
-      .then((results) => this.setState({ data: results, 
-        pageData: results.filter(result => result.id < 10)
-      }));
+      .then((results) =>
+        this.setState({
+          data: results,
+          pageData: results.filter((result) => result.id < 10),
+        })
+      );
   }
 
   onInputChange = (event) => {
     this.setState({ inputText: event.target.value });
   };
+
   onClearInput = () => {
     this.setState({ inputText: "" });
   };
-  handlePageChange(pageNumber) {
-    this.setState({ activePage: pageNumber });
-    // this.displayPage();
-  }
 
-  displayPage = () => {
-    const {data, activePage} = this.state;
+  handlePageChange(pageNumber) {
     const multiplier = 10;
-    const floorID = multiplier * activePage;
+    const floorID = multiplier * pageNumber;
     const ceilingID = floorID + 10;
     let currentID = floorID;
     let allowedIDsArr = [];
@@ -70,11 +70,8 @@ class App extends Component {
       }
       currentID++;
     }
-    const pageData = data.filter((star) =>
-      allowedIDsArr.includes(star.id)
-    );
-    // this.setState({ pageData });
-    this.setState({ pageData }, () => console.log("displayPage DATA :>>>", this.state.pageData));
+    const pageData = this.state.data.filter((star) => allowedIDsArr.includes(star.id));
+    this.setState({ pageData, activePage: pageNumber });
   };
 
   render() {
@@ -106,7 +103,7 @@ class App extends Component {
               <Text family="Monoton" className="f1 tc">
                 LOADING...
               </Text>
-              ) : (
+            ) : (
               <CardList passData={filteredStarz} activePage={activePage} />
             )}
           </Scroll>
@@ -128,7 +125,7 @@ class App extends Component {
               pageRangeDisplayed={4}
               pageCount={9}
               forcePage={activePage}
-              onPageChange={(event) => { this.handlePageChange(event.selected) }}
+              onPageChange={(event) => this.handlePageChange(event.selected) }
             />
           </div>
         </ErrorBoundry>

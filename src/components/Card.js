@@ -7,7 +7,16 @@ const cardStyle = {
     background: 'linear-gradient(180deg, rgba(34, 33, 33, 0.800), rgba(255, 255, 255, 0.700))',
 }
 
-export default function Card(props) {
+export default function Card({
+    name,image,homeworld,species,gender,
+    height,mass,skinColor,eyeColor,hairColor
+}) 
+{
+    const method2Capitalize = 
+        typeof homeworld === "string" ? 
+        (homeworld?.charAt(0).toUpperCase() + homeworld?.slice(1)) : 
+        (homeworld?.join(" & "));
+
     return (
         <article style={cardStyle} className="mw5 center br3 pa3 pa4-ns mv3 ba b--black-10">
             <div className="tc">
@@ -18,25 +27,25 @@ export default function Card(props) {
                     italic
                     weight={600}
                 >
-                    {props.name}
+                    {name}
                 </Text>
                 <img 
-                    src={props.image}
+                    src={image}
                     alt="StarzPic"
                     className="br4 h4 w4 dib ba b--black-05 pa2"
                     width="auto" height="100%"
                 />
                 {/* Jedi Characteristics */}
                 <Font family="Redressed">
-                    <p className="f3 fw4"> 
-                        {props.homeworld && `Homeworld: ${props.homeworld}`} <br />
-                        {props.species && `Species: ${props.species}`} <br />
-                        {props.gender && `Gender: ${props.gender}`} <br />
-                        {props.height && `Height: ${props.height}m`} <br />
-                        {props.mass && `Mass: ${props.mass}kg`} <br />
-                        {props.skinColor && `Skin Color: ${props.skinColor}`} <br />
-                        {props.eyeColor && `Eye Color: ${props.eyeColor}`} <br />
-                        {props.hairColor && `Hair Color: ${props.hairColor}`}
+                    <p className="f3 fw4"> {/** */} 
+                        {homeworld && `Homeworld: ${method2Capitalize}`} <br />
+                        {species && `Species: ${species}`} <br />
+                        {gender && `Gender: ${gender}`} <br />
+                        {height && `Height: ${height}m`} <br />
+                        {mass && `Mass: ${mass}kg`} <br />
+                        {skinColor && `Skin Color: ${skinColor}`} <br />
+                        {eyeColor && `Eye Color: ${eyeColor}`} <br />
+                        {hairColor && `Hair Color: ${hairColor}`}
                     </p>
                 </Font>
             </div>
