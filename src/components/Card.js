@@ -8,14 +8,12 @@ const cardStyle = {
 }
 
 export default function Card(props) {
-    console.log("hairColor: ", props.hairColor);
-    console.log("skinColor: ", props.skinColor);
-    console.log("eyeColor: ", props.eyeColor);
     return (
         <article style={cardStyle} className="mw5 center br3 pa3 pa4-ns mv3 ba b--black-10">
             <div className="tc">
                 <Text
                     className="f2 mb1"
+                    style={{margin: '0'}}
                     family="Redressed"
                     italic
                     weight={600}
@@ -30,15 +28,15 @@ export default function Card(props) {
                 />
                 {/* Jedi Characteristics */}
                 <Font family="Redressed">
-                    <p className="f3 fw4">
-                        Homeworld: {props.homeworld} <br />
-                        Species: {props.species} <br />
-                        Gender: {props.gender} <br />
-                        Height: {props.height}m <br />
-                        Mass: {props.mass}kg <br />
-                        Skin Color: {props.skinColor} <br />
-                        Eye Color: {props.eyeColor} <br />
-                        Hair Color: {props.hairColor} <br />
+                    <p className="f3 fw4"> 
+                        {props.homeworld && `Homeworld: ${props.homeworld}`} <br />
+                        {props.species && `Species: ${props.species}`} <br />
+                        {props.gender && `Gender: ${props.gender}`} <br />
+                        {props.height && `Height: ${props.height}m`} <br />
+                        {props.mass && `Mass: ${props.mass}kg`} <br />
+                        {props.skinColor && `Skin Color: ${props.skinColor}`} <br />
+                        {props.eyeColor && `Eye Color: ${props.eyeColor}`} <br />
+                        {props.hairColor && `Hair Color: ${props.hairColor}`}
                     </p>
                 </Font>
             </div>

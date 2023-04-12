@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // eslint-disable-next-line
-// import offlineAPIcall from "./api-old.json";
+// import offlineAPIcall from "./api-new.json";
 import ErrorBoundry from "./components/ErrorBoundry";
 import CardList from "./containers/CardList";
 import Scroll from "./containers/Scroll";
@@ -25,16 +25,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // data: offlineAPIcall,
+      // data: offlineAPIcall, 
       data: [],
       pageData: [],
       inputText: "",
       activePage: 0,
     };
-    this.allowedIDs = this.allowedIDs.bind(this);
+    this.displayPage = this.displayPage.bind(this);
     this.onClearInput = this.onClearInput.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
-    this.paginationData = this.paginationData.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
@@ -52,17 +51,15 @@ class App extends Component {
   onClearInput = () => {
     this.setState({ inputText: "" });
   };
-
   handlePageChange(pageNumber) {
-    // pageNumber - begins from zero like indexes
-    // console.log(`The active page is ${pageNumber}`);
     this.setState({ activePage: pageNumber });
-    this.paginationData();
+    // this.displayPage();
   }
 
-  allowedIDs = () => {
+  displayPage = () => {
+    const {data, activePage} = this.state;
     const multiplier = 10;
-    const floorID = multiplier * this.state.activePage;
+    const floorID = multiplier * activePage;
     const ceilingID = floorID + 10;
     let currentID = floorID;
     let allowedIDsArr = [];
@@ -73,15 +70,11 @@ class App extends Component {
       }
       currentID++;
     }
-    return allowedIDsArr;
-  };
-  paginationData = () => {
-    console.log("paginationData EXECUTED");
-    const pageData = this.state.data.filter((star) =>
-      this.allowedIDs().includes(star.id)
+    const pageData = data.filter((star) =>
+      allowedIDsArr.includes(star.id)
     );
     // this.setState({ pageData });
-    this.setState({ pageData }, () => console.log(this.state.pageData));
+    this.setState({ pageData }, () => console.log("displayPage DATA :>>>", this.state.pageData));
   };
 
   render() {
@@ -89,8 +82,6 @@ class App extends Component {
     const filteredStarz = data.filter((star) => {
       return star.name.toLowerCase().includes(inputText.toLowerCase());
     });
-    console.log("allowedIDs 2be displayed ---> ", this.allowedIDs());
-    console.log('pageData :>> ', data);
     return (
       <div>
         <Text family="Monoton" className="f1 tc title">
@@ -137,7 +128,7 @@ class App extends Component {
               pageRangeDisplayed={4}
               pageCount={9}
               forcePage={activePage}
-              onPageChange={(event) => this.handlePageChange(event.selected)}
+              onPageChange={(event) => { this.handlePageChange(event.selected) }}
             />
           </div>
         </ErrorBoundry>
