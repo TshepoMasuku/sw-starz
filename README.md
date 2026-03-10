@@ -27,7 +27,7 @@ This react app displays Star Wars stars within cards that show their various cha
 
 ## Home Screenshoot
 
-![Home Screen](./public/assets/SWs_homescreen_image.PNG)
+![Home Screen](./public/assets/sws_homescreen_image.PNG)
 
 ## Run App On Local Machine Using Available Scripts
 
