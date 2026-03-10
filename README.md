@@ -2,12 +2,12 @@
 
 ## Table of Contents
 
-- [Star Wars: starz](#Star Wars: starz)
+- [Star Wars: starz](#star-wars-starz)
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
+  - [What I Have Learned](#what-i-have-learned)
   - [Features](#features)
-  - [Screenshoot](#screenshoot)
-    - [Home Screen](#home-screen)
+  - [Home Screenshoot](#home-screenshoot)
   - [Run App On Local Machine Using Available Scripts](#run-app-on-local-machine-using-available-scripts)
 
 ## Introduction
@@ -25,11 +25,9 @@ This react app displays Star Wars stars within cards that show their various cha
 - Search functionality
 - Pagination functionality
 
-## Screenshoot
+## Home Screenshoot
 
-### Home Screen
-
-![Home Screen](./public/assets/SWs_homescreen_image.PNG)
+![Home Screenshoot](./public/assets/SWs_homescreen_image.png)
 
 ## Run App On Local Machine Using Available Scripts
 
